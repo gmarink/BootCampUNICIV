@@ -6,4 +6,4 @@ Spring Framework
  JPA
  WEB
  JWT
- 
+ Professor @DanielPetrico
