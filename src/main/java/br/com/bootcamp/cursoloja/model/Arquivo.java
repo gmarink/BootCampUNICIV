@@ -5,6 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+
+import org.hibernate.annotations.GenericGenerator;
 
  
 
@@ -12,31 +15,55 @@ import javax.persistence.Id;
 public class Arquivo {
 	
 	@Id
-	@GeneratedValue
-	private Integer id;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
 	
 	@Column(nullable = false)
 	private String nome;
+	
 	@Column
 	private String tipo;
+	
+	@Lob
 	private byte[] dados;
 
+	public Arquivo() {}
+	public Arquivo(String nome, String tipo, byte[] dados) {
+		super();
+		this.nome = nome;
+		this.tipo = tipo;
+		this.dados = dados;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public String getTipo() {
 		return tipo;
 	}
+	
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
 	public byte[] getDados() {
 		return dados;
 	}
+	
 	public void setDados(byte[] dados) {
 		this.dados = dados;
 	}

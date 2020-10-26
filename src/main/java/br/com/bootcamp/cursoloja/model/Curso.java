@@ -3,6 +3,7 @@ package br.com.bootcamp.cursoloja.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
  
  
@@ -34,9 +37,10 @@ public class Curso {
 	private Double preco;
 	
 	@Future(message="{curso.disponivel-a-partir.invalido}")
+	//@JsonIgnore //não retorna o atributo no rest para o cliente
 	private LocalDate disponivelAPartir;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "arquivo_id") //nome da coluna de relação
 	private Arquivo arquivo;
 	
