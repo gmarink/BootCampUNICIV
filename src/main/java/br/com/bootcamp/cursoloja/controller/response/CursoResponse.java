@@ -1,5 +1,8 @@
 package br.com.bootcamp.cursoloja.controller.response;
 
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import br.com.bootcamp.cursoloja.model.Arquivo;
 import br.com.bootcamp.cursoloja.model.Curso;
 
 public class CursoResponse {
@@ -23,6 +26,19 @@ public class CursoResponse {
 		return curso.getPreco();
 	}
 	
-	
+public String getArquivoURL() {
+		
+		Arquivo imagem = curso.getArquivo();
+		
+		if ( imagem == null )
+			return null;
+					
+		String url = ServletUriComponentsBuilder
+			.fromCurrentContextPath()
+			.path("/download/" + imagem.getId())
+			.toUriString();
+		
+		return url;
+	}
 
 }
